@@ -1,0 +1,16 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  ParkingManagement.Domain -> c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.Domain\bin\Debug\net9.0\ParkingManagement.Domain.dll
+  ParkingManagement.Application -> c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.Application\bin\Debug\net9.0\ParkingManagement.Application.dll
+  ParkingManagement.Infrastructure -> c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.Infrastructure\bin\Debug\net9.0\ParkingManagement.Infrastructure.dll
+c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.API\Program.cs(1,43): error CS0234: The type or namespace name 'JwtBearer' does not exist in the namespace 'Microsoft.AspNetCore.Authentication' (are you missing an assembly reference?) [c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.API\ParkingManagement.API.csproj]
+c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.API\Program.cs(4,25): error CS0234: The type or namespace name 'Models' does not exist in the namespace 'Microsoft.OpenApi' (are you missing an assembly reference?) [c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.API\ParkingManagement.API.csproj]
+
+Build FAILED.
+
+c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.API\Program.cs(1,43): error CS0234: The type or namespace name 'JwtBearer' does not exist in the namespace 'Microsoft.AspNetCore.Authentication' (are you missing an assembly reference?) [c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.API\ParkingManagement.API.csproj]
+c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.API\Program.cs(4,25): error CS0234: The type or namespace name 'Models' does not exist in the namespace 'Microsoft.OpenApi' (are you missing an assembly reference?) [c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.API\ParkingManagement.API.csproj]
+    0 Warning(s)
+    2 Error(s)
+
+Time Elapsed 00:00:02.66

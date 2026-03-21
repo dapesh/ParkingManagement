@@ -1,0 +1,12 @@
+  Determining projects to restore...
+  All projects are up-to-date for restore.
+  ParkingManagement.Domain -> c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.Domain\bin\Debug\net9.0\ParkingManagement.Domain.dll
+c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.Application\DTOs\Auth\AuthModels.cs(1,32): error CS0234: The type or namespace name 'Enums' does not exist in the namespace 'ParkingManagement.Domain' (are you missing an assembly reference?) [c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.Application\ParkingManagement.Application.csproj]
+
+Build FAILED.
+
+c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.Application\DTOs\Auth\AuthModels.cs(1,32): error CS0234: The type or namespace name 'Enums' does not exist in the namespace 'ParkingManagement.Domain' (are you missing an assembly reference?) [c:\Users\Dipesh\Desktop\NumberPlateDetectionSystem\ParkingManagementAPI\ParkingManagement.Application\ParkingManagement.Application.csproj]
+    0 Warning(s)
+    1 Error(s)
+
+Time Elapsed 00:00:02.35
