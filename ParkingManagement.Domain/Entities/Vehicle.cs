@@ -6,6 +6,11 @@ namespace ParkingManagement.Domain.Entities
         public string PlateNumber { get; set; } = string.Empty;
         public string OwnerName { get; set; } = string.Empty;
         public string ApartmentNumber { get; set; } = string.Empty;
+        public string PhoneNumber { get; set; } = string.Empty;
+
+        public int? AssignedSlotId { get; set; }
+        public ParkingSlot? AssignedSlot { get; set; }
+
         public bool IsRegistered { get; set; } = true;
         public DateTime RegisteredAt { get; set; } = DateTime.UtcNow;
 

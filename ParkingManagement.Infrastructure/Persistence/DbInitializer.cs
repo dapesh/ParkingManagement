@@ -33,15 +33,47 @@ namespace ParkingManagement.Infrastructure.Persistence
                 await context.SaveChangesAsync();
             }
 
-            var vehicles = new List<Vehicle>
+            if (!await context.Apartments.AnyAsync())
             {
-                new Vehicle { PlateNumber = "ABC 123", OwnerName = "John Doe", ApartmentNumber = "101" },
-                new Vehicle { PlateNumber = "XYZ 789", OwnerName = "Jane Smith", ApartmentNumber = "202" },
-                new Vehicle { PlateNumber = "KBP 456", OwnerName = "Alice Brown", ApartmentNumber = "303" }
-            };
+                var apt1 = new Apartment { Name = "Antigravity Apartments", Address = "Gate 1, High St" };
+                context.Apartments.Add(apt1);
+                await context.SaveChangesAsync();
 
-            context.Vehicles.AddRange(vehicles);
-            await context.SaveChangesAsync();
+                // Seed 5 slots
+                var slots = new List<ParkingSlot>();
+                for (int i = 1; i <= 5; i++)
+                {
+                    slots.Add(new ParkingSlot { SlotNumber = $"P-{i:00}", ApartmentId = apt1.Id, IsOccupied = false });
+                }
+                context.ParkingSlots.AddRange(slots);
+                await context.SaveChangesAsync();
+            }
+
+            if (!await context.Vehicles.AnyAsync())
+            {
+                var slot1 = await context.ParkingSlots.FirstAsync(s => s.SlotNumber == "P-01");
+                var slot2 = await context.ParkingSlots.FirstAsync(s => s.SlotNumber == "P-02");
+
+                context.Vehicles.AddRange(
+                    new Vehicle 
+                    { 
+                        PlateNumber = "KBP 456", 
+                        OwnerName = "Dipesh", 
+                        ApartmentNumber = "101", 
+                        PhoneNumber = "9800000001",
+                        AssignedSlotId = slot1.Id
+                    },
+                    new Vehicle 
+                    { 
+                        PlateNumber = "BAG 123", 
+                        OwnerName = "Sita", 
+                        ApartmentNumber = "202", 
+                        PhoneNumber = "9800000002",
+                        AssignedSlotId = slot2.Id
+                    }
+                );
+                await context.SaveChangesAsync();
+            }
         }
     }
 }

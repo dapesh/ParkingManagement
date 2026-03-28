@@ -34,5 +34,12 @@ namespace ParkingManagement.API.Controllers
 
             return StatusCode(result.StatusCode, result);
         }
+        [HttpPost("register")]
+        public async Task<IActionResult> RegisterVehicle([FromBody] VehicleRegistrationRequest request)
+        {
+            var result = await _parkingService.RegisterVehicleAsync(request);
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
+        }
     }
 }

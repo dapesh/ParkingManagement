@@ -6,8 +6,14 @@ namespace ParkingManagement.Domain.Entities
         public int VehicleId { get; set; }
         public DateTime EntryTime { get; set; }
         public DateTime? ExitTime { get; set; }
-        public double? StayDurationMinutes { get; set; }
+        public double? DurationInMinutes { get; set; }
 
-        public virtual Vehicle? Vehicle { get; set; }
+        public int? SlotId { get; set; }
+        public ParkingSlot? Slot { get; set; }
+
+        public int? ApartmentId { get; set; }
+        public Apartment? Apartment { get; set; }
+
+        public Vehicle Vehicle { get; set; } = null!;
     }
 }

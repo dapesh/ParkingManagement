@@ -9,6 +9,9 @@ namespace ParkingManagement.Application.Interfaces
         DbSet<ParkingRecord> ParkingRecords { get; }
         DbSet<Role> Roles { get; }
         DbSet<User> Users { get; }
+        DbSet<Apartment> Apartments { get; }
+        DbSet<ParkingSlot> ParkingSlots { get; }
+        DbSet<Complaint> Complaints { get; }
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }
