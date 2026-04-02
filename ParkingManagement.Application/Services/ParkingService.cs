@@ -9,6 +9,7 @@ namespace ParkingManagement.Application.Services
     {
         Task<ApiResponse<object>> ProcessPlateAsync(string plateNumber);
         Task<ApiResponse<object>> RegisterVehicleAsync(VehicleRegistrationRequest request);
+        Task<ApiResponse<List<ParkingSlotResponse>>> GetFreeSlotsAsync(int apartmentId);
     }
 
     public class ParkingService : IParkingService
@@ -111,11 +112,34 @@ namespace ParkingManagement.Application.Services
                 return ApiResponse<object>.CreateFailure("No apartments found in the system.", 404);
             }
 
-            var freeSlot = apartment.ParkingSlots.FirstOrDefault(s => !s.IsOccupied && _context.Vehicles.All(v => v.AssignedSlotId != s.Id));
+            ParkingSlot? freeSlot;
 
-            if (freeSlot == null)
+            if (request.AssignedSlotId.HasValue)
             {
-                return ApiResponse<object>.CreateFailure("No free parking slots available.", 400);
+                var specificSlot = await _context.ParkingSlots
+                    .FirstOrDefaultAsync(s => s.Id == request.AssignedSlotId.Value);
+
+                if (specificSlot == null)
+                {
+                    return ApiResponse<object>.CreateFailure("The specified parking slot does not exist.", 404);
+                }
+
+                var isSlotTaken = await _context.Vehicles.AnyAsync(v => v.AssignedSlotId == specificSlot.Id);
+                if (isSlotTaken || specificSlot.IsOccupied)
+                {
+                    return ApiResponse<object>.CreateFailure("The specified parking slot is already assigned or occupied.", 400);
+                }
+
+                freeSlot = specificSlot;
+            }
+            else
+            {
+                freeSlot = apartment.ParkingSlots.FirstOrDefault(s => !s.IsOccupied && _context.Vehicles.All(v => v.AssignedSlotId != s.Id));
+
+                if (freeSlot == null)
+                {
+                    return ApiResponse<object>.CreateFailure("No free parking slots available.", 400);
+                }
             }
 
             // 2. Create the vehicle
@@ -141,6 +165,22 @@ namespace ParkingManagement.Application.Services
                 AssignedSlot = freeSlot.SlotNumber,
                 Message = registrationMessage
             }, registrationMessage);
+        }
+
+        public async Task<ApiResponse<List<ParkingSlotResponse>>> GetFreeSlotsAsync(int apartmentId)
+        {
+            var freeSlots = await _context.ParkingSlots
+                .Where(s => s.ApartmentId == apartmentId && !s.IsOccupied)
+                .Where(s => !_context.Vehicles.Any(v => v.AssignedSlotId == s.Id))
+                .Select(s => new ParkingSlotResponse
+                {
+                    Id = s.Id,
+                    SlotNumber = s.SlotNumber,
+                    IsOccupied = s.IsOccupied
+                })
+                .ToListAsync();
+
+            return ApiResponse<List<ParkingSlotResponse>>.CreateSuccess(freeSlots, "Free slots retrieved successfully.");
         }
     }
 }

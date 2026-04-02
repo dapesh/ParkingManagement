@@ -41,5 +41,13 @@ namespace ParkingManagement.API.Controllers
             if (result.Success) return Ok(result);
             return BadRequest(result);
         }
+
+        [HttpGet("free-slots/{apartmentId}")]
+        public async Task<IActionResult> GetFreeSlots(int apartmentId)
+        {
+            var result = await _parkingService.GetFreeSlotsAsync(apartmentId);
+            if (result.Success) return Ok(result);
+            return BadRequest(result);
+        }
     }
 }
